@@ -1,0 +1,35 @@
+[gd_scene load_steps=6 format=3 uid="uid://xcfjs1bmcm7w"]
+
+[ext_resource type="Script" path="res://FlappyBody.cs" id="1_8lw7p"]
+[ext_resource type="Texture2D" uid="uid://bjti7yee7ng85" path="res://Abeja.png" id="2_r3w30"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_yalj8"]
+radius = 30.0167
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_bjm3r"]
+atlas = ExtResource("2_r3w30")
+region = Rect2(0, 0, 240, 240)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_03tod"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_bjm3r")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}]
+
+[node name="Flappy" type="Node2D"]
+
+[node name="RigidBody2D" type="RigidBody2D" parent="."]
+script = ExtResource("1_8lw7p")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="RigidBody2D"]
+shape = SubResource("CircleShape2D_yalj8")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="RigidBody2D"]
+position = Vector2(-1, 0)
+scale = Vector2(0.365625, 0.392708)
+sprite_frames = SubResource("SpriteFrames_03tod")

@@ -1,0 +1,69 @@
+[gd_scene load_steps=7 format=3 uid="uid://dh63wcgddph0x"]
+
+[ext_resource type="Script" path="res://Barrier.cs" id="1_sw634"]
+[ext_resource type="Texture2D" uid="uid://cki3wu5yqiiwa" path="res://tile_0036.png" id="2_4h6g6"]
+[ext_resource type="Texture2D" uid="uid://dfpmxemsgn36" path="res://tile_0056.png" id="3_4pkns"]
+[ext_resource type="Script" path="res://AreaTrigger.cs" id="4_gou01"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_6hchf"]
+size = Vector2(39.5, 444.5)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_td64i"]
+size = Vector2(40, 200)
+
+[node name="Node2D" type="Node2D" node_paths=PackedStringArray("bottomBarrierSprite")]
+script = ExtResource("1_sw634")
+bottomBarrierSprite = NodePath("StaticBody2D2/NinePatchRect2")
+groundHeight = 312.0
+
+[node name="StaticBody2D" type="StaticBody2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D"]
+position = Vector2(20.25, 228.25)
+shape = SubResource("RectangleShape2D_6hchf")
+
+[node name="NinePatchRect" type="NinePatchRect" parent="StaticBody2D"]
+offset_left = 1.0
+offset_top = 1.0
+offset_right = 41.0
+offset_bottom = 41.0
+texture = ExtResource("2_4h6g6")
+
+[node name="NinePatchRect2" type="NinePatchRect" parent="StaticBody2D"]
+offset_top = 37.0
+offset_right = 40.0
+offset_bottom = 282.0
+texture = ExtResource("3_4pkns")
+axis_stretch_vertical = 1
+
+[node name="StaticBody2D2" type="StaticBody2D" parent="."]
+position = Vector2(41, -150)
+rotation = 3.14159
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D2"]
+position = Vector2(20.25, 274)
+shape = SubResource("RectangleShape2D_6hchf")
+
+[node name="NinePatchRect" type="NinePatchRect" parent="StaticBody2D2"]
+offset_top = 52.0
+offset_right = 40.0
+offset_bottom = 92.0
+texture = ExtResource("2_4h6g6")
+
+[node name="NinePatchRect2" type="NinePatchRect" parent="StaticBody2D2"]
+offset_top = 92.0
+offset_right = 40.0
+offset_bottom = 451.0
+texture = ExtResource("3_4pkns")
+axis_stretch_vertical = 1
+
+[node name="AreaTrigger" type="Area2D" parent="."]
+collision_layer = 4
+collision_mask = 3
+script = ExtResource("4_gou01")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="AreaTrigger"]
+position = Vector2(32, -100)
+shape = SubResource("RectangleShape2D_td64i")
+
+[connection signal="body_entered" from="AreaTrigger" to="AreaTrigger" method="_on_body_entered"]

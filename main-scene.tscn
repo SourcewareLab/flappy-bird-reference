@@ -1,0 +1,53 @@
+[gd_scene load_steps=7 format=3 uid="uid://dmoobtbaqkkhm"]
+
+[ext_resource type="PackedScene" uid="uid://xcfjs1bmcm7w" path="res://flappy.tscn" id="1_0iqfr"]
+[ext_resource type="Script" path="res://GameManager.cs" id="1_fuerj"]
+[ext_resource type="PackedScene" uid="uid://dh63wcgddph0x" path="res://Barrier.tscn" id="2_b6nuf"]
+[ext_resource type="Script" path="res://Ground.cs" id="2_d4brt"]
+[ext_resource type="Texture2D" uid="uid://dif6kucklcmhg" path="res://elden-ring-pixel.jpg" id="3_kmt0q"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_tnllf"]
+size = Vector2(1146, 56)
+
+[node name="Root" type="Node2D"]
+
+[node name="GameManager" type="Node" parent="." node_paths=PackedStringArray("player")]
+script = ExtResource("1_fuerj")
+barrierScene = ExtResource("2_b6nuf")
+spawnHeightRange = Vector2(300, 550)
+player = NodePath("../Flappy/RigidBody2D")
+
+[node name="Flappy" parent="." instance=ExtResource("1_0iqfr")]
+position = Vector2(234, 311)
+
+[node name="RigidBody2D" parent="Flappy" index="0" groups=["flappy"]]
+collision_layer = 4
+collision_mask = 3
+lock_rotation = true
+
+[node name="CharacterBody2D" type="CharacterBody2D" parent="." node_paths=PackedStringArray("flappy")]
+position = Vector2(-4, 2)
+collision_layer = 2
+collision_mask = 4
+script = ExtResource("2_d4brt")
+flappy = NodePath("../Flappy/RigidBody2D")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="CharacterBody2D"]
+position = Vector2(579, 673)
+shape = SubResource("RectangleShape2D_tnllf")
+debug_color = Color(0.826568, 0.396817, 0, 0.42)
+
+[node name="Camera2D" type="Camera2D" parent="CharacterBody2D"]
+position = Vector2(578, 324)
+
+[node name="ParallaxBackground" type="ParallaxBackground" parent="."]
+
+[node name="ParallaxLayer" type="ParallaxLayer" parent="ParallaxBackground"]
+motion_mirroring = Vector2(1720, 0)
+
+[node name="Sprite2D" type="Sprite2D" parent="ParallaxBackground/ParallaxLayer"]
+position = Vector2(574, 261)
+scale = Vector2(0.897526, 0.874537)
+texture = ExtResource("3_kmt0q")
+
+[editable path="Flappy"]

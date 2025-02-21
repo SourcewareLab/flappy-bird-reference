@@ -1,0 +1,20 @@
+[gd_scene load_steps=3 format=3 uid="uid://w1487gay57t4"]
+
+[sub_resource type="CylinderMesh" id="CylinderMesh_1vk2i"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_m22u3"]
+size = Vector2(142, 323)
+
+[node name="Pillar" type="Node2D"]
+position = Vector2(96, 64)
+
+[node name="StaticBody2D" type="StaticBody2D" parent="."]
+
+[node name="MeshInstance2D" type="MeshInstance2D" parent="StaticBody2D"]
+position = Vector2(3, 2)
+scale = Vector2(142.75, 161.5)
+mesh = SubResource("CylinderMesh_1vk2i")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D"]
+position = Vector2(1, 1)
+shape = SubResource("RectangleShape2D_m22u3")
